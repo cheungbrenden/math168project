@@ -3,7 +3,16 @@ import numpy as np
 import networkx as nx
 import matplotlib.pyplot as plt
 from mpl_toolkits.basemap import Basemap
+import warnings
+warnings.filterwarnings("ignore")
 
+
+# Create Graph
+def create_graph(data):
+    temp = data.groupby(["origin", "dest"]).sum().reset_index()
+    return nx.from_pandas_edgelist(temp, source='origin', target='dest', edge_attr=['num_of_flights'], create_using=nx.DiGraph)
+
+# Visualization 
 airports_us = pd.read_csv("data/airports_us.csv")
 m = Basemap(
         projection='merc',
@@ -16,7 +25,7 @@ m = Basemap(
         suppress_ticks=True)
 mx, my = m(airports_us['longitude'].values, airports_us['latitude'].values)
 pos = {}
-for count, elem in enumerate (airports_us['airport']):
+for count, elem in enumerate(airports_us['airport']):
     pos[elem] = (mx[count], my[count])
 
 def viz_map(flights, year):
