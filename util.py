@@ -9,8 +9,17 @@ warnings.filterwarnings("ignore")
 
 # Create Graph
 def create_graph(data):
+    """Create a graph given a cleanded pandas df
+
+    Args:
+        data: pandas df
+
+    Returns:
+        a directed, weighted graph, with weight with the name "num_of_flights"
+    """
     temp = data.groupby(["origin", "dest"]).sum().reset_index()
     return nx.from_pandas_edgelist(temp, source='origin', target='dest', edge_attr=['num_of_flights'], create_using=nx.DiGraph)
+
 
 # Visualization 
 airports_us = pd.read_csv("data/airports_us.csv")
@@ -28,12 +37,13 @@ pos = {}
 for count, elem in enumerate(airports_us['airport']):
     pos[elem] = (mx[count], my[count])
 
+
 def viz_map(flights, year):
     """visulize flights data on a map
 
     Args:
         flights: a cleaned dataframe 
-        year: just input a year
+        year: just input a year, so it can make the right title and save with the correct file name
     """
     
     plt.figure(figsize = (10,9))
