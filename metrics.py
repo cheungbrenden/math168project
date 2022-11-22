@@ -3,7 +3,19 @@ from util import *
 
 # 1.a Centrality Measures
 
-def adjacency_matrix(G):
+
+def airport_dict(G):
+    """
+    :param G:
+    :return: dictionary(key = airport, value = index)
+    """
+
+    airports = [airport for airport in G.nodes]
+    airports_dict = {k: v for v, k in enumerate(airports)}
+    return airports_dict
+
+
+def weighted_adjacency_matrix(G):
     """
     :param G: Graph
     :return: numpy matrix of 296x296
@@ -17,11 +29,84 @@ def adjacency_matrix(G):
     for airport in airports:
         current_airport_list = [0] * len(airports)
         for neighbor in list(G.neighbors(airport)):
-            current_airport_list[airports_dict[neighbor]] = G.get_edge_data(airport, neighbor, 'num_of_flights')['num_of_flights']
+            current_airport_list[airports_dict[neighbor]] = G.get_edge_data(airport, neighbor, 'num_of_flights')[
+                'num_of_flights']
         flight_matrix.append(current_airport_list)
     np_flight_matrix = np.matrix(flight_matrix)
 
     return np_flight_matrix
+
+
+def unweighted_adjacency_matrix(G):
+    """
+    :param G: Graph
+    :return: numpy matrix of 296x296
+
+    note: there are 296 airports in the network
+    """
+
+    airports = [airport for airport in G.nodes]
+    airports_dict = {k: v for v, k in enumerate(airports)}
+    flight_matrix = []
+    for airport in airports:
+        current_airport_list = [0] * len(airports)
+        for neighbor in list(G.neighbors(airport)):
+            current_airport_list[airports_dict[neighbor]] = 1
+        flight_matrix.append(current_airport_list)
+    np_flight_matrix = np.matrix(flight_matrix)
+
+    return np_flight_matrix
+
+
+def get_num_of_flights(G, origin, dest, weighted=True):
+    airportsDict = airport_dict(G)
+    adj_matrix = weighted_adjacency_matrix(G) if weighted else unweighted_adjacency_matrix(G)
+
+    if not (origin in airportsDict and dest in airportsDict):
+        return "Origin or Dest airport not in airports dictionary"
+    return adj_matrix[airportsDict[origin], airportsDict[dest]]
+
+
+def degrees(G, ascending=False, num_of_entries=None):
+    """
+
+    :param G: Graph
+    :param ascending:
+    True - lowest to highest
+    (default) False - highest to lowest
+    :param num_of_entries:
+    (default) None - show all airports
+    positive int x - show x airports
+    :return: [(airport, degree)]
+    """
+    d = dict(G.degree(weight="num_of_flights"))
+    return sorted(d.items(), key=lambda x: x[1], reverse=(not ascending))[:num_of_entries]
+
+
+def betweenness_centrality(G, weighted=True, normalized=True, ascending=False, num_of_entries=None):
+    """
+
+    :param G: Graph
+    :param weighted:
+    (default) True - uses num_of_flights as edge weight
+    False - no weight
+    :param normalized:
+    (default) True - betweenness value are normalized by 1/((n-1)(n-2))
+    False - no normalization
+    :param ascending:
+    True - lowest to highest
+    (default) False - highest to lowest
+    :param num_of_entries:
+    (default) None - show all airports
+    positive int x - show x airports
+    :return: [(airport, betweenness_centrality)]
+    """
+
+    bc_dict = nx.betweenness_centrality(G, weight="num_of_flights", normalized=normalized) if weighted else \
+        nx.betweenness_centrality(G, normalized=normalized)
+
+    return sorted(bc_dict.items(), key=lambda x: x[1], reverse=(not ascending))[:num_of_entries]
+
 
 
 # 1.b Assortativity, WEIGHTED
