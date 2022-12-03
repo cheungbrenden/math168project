@@ -54,7 +54,7 @@ def viz_map(flights, year):
     counts = pd.DataFrame(temp.origin.value_counts())
     counts.columns=["total_flight"]
     G_2009 = nx.from_pandas_edgelist(temp, source='origin', target='dest', edge_attr=['num_of_flights'], create_using=nx.DiGraph)
-    plt.figure(figsize=(15,20))
+    # plt.figure(figsize=(15,20))
     nx.draw_networkx_nodes(G = G_2009, pos = pos, nodelist = [x for x in G_2009.nodes() if counts['total_flight'][x] >= 100],
                            node_color='#e74c3c', alpha=0.8,
                                 node_size = [counts['total_flight'][x]*4  for x in G_2009.nodes() if counts['total_flight'][x] >= 100])
