@@ -39,7 +39,7 @@ for count, elem in enumerate(airports_us['airport']):
 
 
 def viz_map(flights, year):
-    """visulize flights data on a map
+    """visualize flights data on a map
 
     Args:
         flights: a cleaned dataframe 

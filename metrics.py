@@ -117,6 +117,10 @@ def gini_coef(G):
         res += np.abs(deg_dist - i).sum()
     return res / G.number_of_nodes() / deg_dist.sum()
 
+# 1.c Network efficiency
+def network_efficiency(G):
+    pass
+
 
 # 1.d.i global clutering coef, UNWEIGHTED
 def clustering_coef(G):
@@ -127,6 +131,9 @@ def clustering_coef(G):
 def average_shortest_path_length(G):
     return nx.average_shortest_path_length(G)
 
+# 1.e Scale Free Properties
+def power_law_dist(G):
+    pass
 
 # 2.a resilience of a given airport
 def resilience(G):
