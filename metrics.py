@@ -66,22 +66,10 @@ def get_num_of_flights(G, origin, dest, weighted=True):
         return "Origin or Dest airport not in airports dictionary"
     return adj_matrix[airportsDict[origin], airportsDict[dest]]
 
-
-def degrees(G, ascending=False, num_of_entries=None):
-    """
-
-    :param G: Graph
-    :param ascending:
-    True - lowest to highest
-    (default) False - highest to lowest
-    :param num_of_entries:
-    (default) None - show all airports
-    positive int x - show x airports
-    :return: [(airport, degree)]
-    """
-    d = dict(G.degree(weight="num_of_flights"))
-    return sorted(d.items(), key=lambda x: x[1], reverse=(not ascending))[:num_of_entries]
-
+def get_mean_degree(G):
+    degrees = [d for n, d in G.degree()]
+    mean_degree = sum(degrees) / len(degrees)
+    return mean_degree
 
 def betweenness_centrality(G, weighted=True, normalized=True, ascending=False, num_of_entries=None):
     """
@@ -108,6 +96,16 @@ def betweenness_centrality(G, weighted=True, normalized=True, ascending=False, n
     return sorted(bc_dict.items(), key=lambda x: x[1], reverse=(not ascending))[:num_of_entries]
 
 
+def top_eigenvector_centrality(G, x=1):
+    # Compute the eigenvector centrality of the graph
+    eigenvector_centrality = nx.eigenvector_centrality(G)
+
+    # Sort the nodes based on their eigenvector centrality score
+    sorted_nodes = sorted(eigenvector_centrality, key=eigenvector_centrality.get, reverse=True)
+
+    # Return the x nodes with the best eigenvector centrality
+    return [(node, eigenvector_centrality[node]) for node in sorted_nodes[:x]]
+
 
 # 1.b Assortativity, WEIGHTED
 def gini_coef(G):
@@ -117,9 +115,21 @@ def gini_coef(G):
         res += np.abs(deg_dist - i).sum()
     return res / G.number_of_nodes() / deg_dist.sum()
 
+
 # 1.c Network efficiency
-def network_efficiency(G):
-    pass
+def calculate_network_efficiency(G):
+    efficiency = 0
+    for node1 in G.nodes():
+        for node2 in G.nodes():
+            if node1 != node2:
+                # Calculate the shortest path between the two nodes
+                path = nx.shortest_path(G, node1, node2)
+                # Calculate the length of the path
+                path_length = len(path)
+                # Update the total efficiency
+                efficiency += 1 / path_length
+    # Return the average efficiency
+    return efficiency / (len(G.nodes()) * (len(G.nodes()) - 1))
 
 
 # 1.d.i global clutering coef, UNWEIGHTED
@@ -131,9 +141,11 @@ def clustering_coef(G):
 def average_shortest_path_length(G):
     return nx.average_shortest_path_length(G)
 
+
 # 1.e Scale Free Properties
 def power_law_dist(G):
     pass
+
 
 # 2.a resilience of a given airport
 # Note: it can take up to 6 minutes to compute this value
