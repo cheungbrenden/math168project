@@ -110,10 +110,14 @@ def top_eigenvector_centrality(G, x=1):
 # 1.b Assortativity, WEIGHTED
 def gini_coef(G):
     deg_dist = np.array(list(dict(G.degree(weight="num_of_flights")).values()))
-    res = 0
+    res = 0.0
     for i in deg_dist:
         res += np.abs(deg_dist - i).sum()
-    return res / G.number_of_nodes() / deg_dist.sum()
+        # if res < 0:
+            # print(res)
+        # if np.abs(deg_dist - i).sum() < 0:
+        #     print(np.abs(deg_dist - i).sum())
+    return res / G.number_of_nodes() / deg_dist.sum() / 2
 
 
 # 1.c Network efficiency
