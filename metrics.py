@@ -147,8 +147,33 @@ def average_shortest_path_length(G):
 
 
 # 1.e Scale Free Properties
-def power_law_dist(G):
-    pass
+def analyze_degree_distribution(G):
+    # Compute the in-degree and out-degree centralities for each node
+    indeg_centralities = nx.in_degree_centrality(G)
+    outdeg_centralities = nx.out_degree_centrality(G)
+
+    # Count the number of nodes with each in-degree and out-degree
+    indeg_counts = Counter(dict(G.in_degree()).values())
+    outdeg_counts = Counter(dict(G.out_degree()).values())
+
+    # Compute the probability of a node having each in-degree and out-degree
+    indeg_probs = {k: v / G.number_of_nodes() for k, v in indeg_counts.items()}
+    outdeg_probs = {k: v / G.number_of_nodes() for k, v in outdeg_counts.items()}
+
+    # Compute the cumulative in-degree and out-degree probabilities
+    indeg_cumulative_probs = {}
+    outdeg_cumulative_probs = {}
+    cum_prob = 0.0
+    for k in sorted(indeg_probs.keys(), reverse=True):
+        cum_prob += indeg_probs[k]
+        indeg_cumulative_probs[k] = cum_prob
+    cum_prob = 0.0
+    for k in sorted(outdeg_probs.keys(), reverse=True):
+        cum_prob += outdeg_probs[k]
+        outdeg_cumulative_probs[k] = cum_prob
+
+    # Return the cumulative in-degree and out-degree probabilities
+    return indeg_cumulative_probs, outdeg_cumulative_probs
 
 
 # 2.a resilience of a given airport
