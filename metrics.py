@@ -71,29 +71,16 @@ def get_mean_degree(G):
     mean_degree = sum(degrees) / len(degrees)
     return mean_degree
 
-def betweenness_centrality(G, weighted=True, normalized=True, ascending=False, num_of_entries=None):
-    """
 
-    :param G: Graph
-    :param weighted:
-    (default) True - uses num_of_flights as edge weight
-    False - no weight
-    :param normalized:
-    (default) True - betweenness value are normalized by 1/((n-1)(n-2))
-    False - no normalization
-    :param ascending:
-    True - lowest to highest
-    (default) False - highest to lowest
-    :param num_of_entries:
-    (default) None - show all airports
-    positive int x - show x airports
-    :return: [(airport, betweenness_centrality)]
-    """
+def betweenness_centrality(G, normalized=True):
+    # Compute the betweenness centrality for each node in the graph
+    if normalized:
+        betweenness_centralities = nx.betweenness_centrality(G, normalized=True)
+    else:
+        betweenness_centralities = nx.betweenness_centrality(G, normalized=False)
 
-    bc_dict = nx.betweenness_centrality(G, weight="num_of_flights", normalized=normalized) if weighted else \
-        nx.betweenness_centrality(G, normalized=normalized)
-
-    return sorted(bc_dict.items(), key=lambda x: x[1], reverse=(not ascending))[:num_of_entries]
+    # Return the betweenness centralities
+    return betweenness_centralities
 
 
 def top_eigenvector_centrality(G, x=1):
@@ -181,3 +168,4 @@ def analyze_degree_distribution(G):
 def resilience(G):
     # 1. Relative strength s_i
     return nx.average_node_connectivity(G)
+
