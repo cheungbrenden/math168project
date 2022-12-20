@@ -1,0 +1,63 @@
+The sections and requirements in the PNAS template.
+
+Here are some things to make sure that you include in your final reports. For examples of PNAS papers to help give guidance, here are two papers that I published in that journal:
+
+	https://www.math.ucla.edu/~mason/papers/berthier-final.pdf
+
+	https://www.math.ucla.edu/~mason/papers/simple-online.pdf
+
+
+Here are the links to the PNAS templates, which you can open and edit together in Overleaf, or download the source for and use some other editor:
+ 
+	Report template: https://www.overleaf.com/latex/templates/template-for-preparing-your-research-report-submission-to-pnas-using-overleaf/fzcbzjvpvnxn
+
+	Supplementary information template (optional): https://www.overleaf.com/latex/templates/pnas-template-for-supplementary-information/wqfsfqwyjtsd
+
+----
+
+Sections and report components
+
+1. Title: Your paper needs a title.
+
+2. Authors: You need to give your names.
+
+3. Abstract: This gives a brief synopsis of what is in your report. It should be understandable to students in Math 168 at a broad level. (Recall that PNAS is a journal with readers across a broad variety of disciplines.)
+
+4. Keywords: This gives relevant keywords to tag methods and applications. Think of tagging things like a blog entry or photograph.
+
+5. Significance statement: This gives a big-picture idea of where your work fits into the study of networks, complex systems, and their applications. It is typically about the bigger-picture than the abstract. (The abstract says what is in the paper; the significance statement says how the paper's contents fit into a wider scholarly setting.)
+
+6. Author contributions: State who did what
+
+7. Introduction: This describes, in big-picture terms, what problem you're studying, why it is important, and where it fits into existing work. Include explicit citations of references in this narrative.
+
+8. More detailed (perhaps mathematical) background: After briefly mentioning background in a big-picture way in an introduction, it is often appropriate to give more precise mathematical details (if relevant) in a separate section.
+
+9. Methods and Models (and 'Materials', when relevant, although that's more for experimental studies): Carefully describe all methods and models. This should be understandable to all Math 168 students. 
+
+10. Results: Carefully describe your main and supporting results. Additional details should be in the main text if there is room, but less important results can be in the Supplementary Information if there isn't enough space.
+
+11. Conclusions and Discussion: Summarize your results and discuss their implications. It may be relevant to bring up future work.
+
+12. Limitations: Explicitly discuss the limitations of your work. This could be part of the Discussion or it may be elsewhere.
+
+13. Acknowledgements: Acknowledge all help and resources from others. If you seek to e.g. use somebody else's figure, you need _both_ (1) an explicit acknowledgement of the source and (2) explicit permission from them to use their work.
+
+14. References: You must include proper citations with in-text references and full citations in the references section of all sources that you use. This includes (but is not limited to) sources for data sets, methods used, similar work that exists or that you used for inspiration, background work that helps with the big picture, and so on. You can (and probably will) use the textbook as a citation. The PNAS template has a .bib file (pnas-sample.bib) that you can edit so that the citation style matches the PNAS journal format. You do not have to use a .bib file, but you will almost certainly find that to be the easiest way to do things.
+
+15. Appendices: Appendices are optional, but sometimes they are useful for organizing things. For example, if there is a technical theorem whose proof is not illuminating, one might state the theorem in the main text but relegate its proof to an appendix. In the PNAS journal format, which has manuscript length requirements (see 16 below), you can use the optional supplementary information document to include any appendices. 
+
+
+Additional requirements:
+
+16. Manuscript length (and supplementary information): PNAS has a preferred maximum length of 6 pages for their main format. Pages beyond 6 should typically be part of supplementary information, which has less essential information than what you include in the main text. Note that Supplementary Information is optional. PNAS does allow articles that are up to 12 pages in length, so that's ok. However, you should try for 6 pages.
+
+17. Code and scientific replicability. Scientific work must be replicable. Everything needs to be specified precisely. All notation must be defined precisely and unambiguously. Either include (1) a hyperlink to a code and data repository or (2) a shared folder or .zip file of these materials. A common place to put hyperlinks to code repositories is towards the end of the paper before the acknowledgements, but sometimes other spots are easier for readers. 
+
+18. Figures: There should be figures to illustrate your work. This typically includes figures of results, and it often includes figures to help describe the problem (or, when relevant, how a mathematical model or algorithm works). You should label the figures and reference them in the text by their number.  Captions for figures should be sufficiently descriptive that the figure with caption can stand alone separate from the text and a reader can still know what is being presented (even if they can't analyze it).
+
+19. Tables and Algorithm 'floats': These are two other types of floats (in addition to figures). It may be relevant to have an Algorithm float as pseudocode or to summarize results in the format of a table. Formatting floats in LaTeX can be tricky. Do not have your figures/tables/algorithms all bunched up towards the end and try to space them in the text appropriately. Tables and algorithms should also be labeled and referenced in the the text by number. Captions for tables should clearly describe the table contents.
+
+20. Equations: You will likely have equations, including displayed equations. Number them and refer to them by number. Explicitly define all notation in them.
+
+21. Formatting can be tricky and takes time. Do not wait until the last minute to put together the report. Feel free to e-mail or talk to us with any specific questions regarding formatting or the report contents.
