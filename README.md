@@ -1,6 +1,6 @@
 # US Airline Network Temporal Analysis
 
-Authors: [Alan Wang](https://github.com/alanwmy00), [Kun Xu](), [Brenden Cheung](https://github.com/cheungbrenden)
+**Authors**: [Alan Wang](https://github.com/alanwmy00), [Kun Xu](), [Brenden Cheung](https://github.com/cheungbrenden)
 
 [**Report**](https://github.com/cheungbrenden/math168project/blob/main/Report/US%20Domestic%20Airline%20Network%20Temporal%20Analysis.pdf), [**Presentation**](https://docs.google.com/presentation/d/16Y9eYwcbuMGsgm9yinTWseVvYD7hgsvm/edit?usp=sharing&ouid=105910326852880295992&rtpof=true&sd=true)
 
